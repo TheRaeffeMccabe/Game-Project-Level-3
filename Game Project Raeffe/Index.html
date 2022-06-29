@@ -1,0 +1,288 @@
+<!doctype html>
+<head> 
+    <title>Velocity</title>
+    <link rel="stylesheet" href="Styles.css">
+</head>
+<body>
+    <canvas id="gameCanvas" width="600" height="600"></canvas>
+    
+    <script>
+        var canvas, canvasContext;
+
+        window.onload = function(){
+            canvas = document.getElementById('gameCanvas');
+            canvasContext = canvas.getContext('2d');
+            
+            document.addEventListener('keydown', keyPressed);
+            document.addEventListener('keyup', keyReleased);
+
+            setInterval(mainloop, 1000/50);
+            
+        }
+    // Player Vars  
+    var player = new Image();
+    player.src = 'Images/Player Edited.png';
+    var playerXpos = 250;
+    var playerYpos = 500;
+    var playerXspeed = 15;
+    var playerYspeed = 0;
+    var PLAYER_SIZE = 40;
+    var timer = 0;
+        
+        
+    //Username Difficulty
+    var userName = '';
+    var deathscreen = false;
+    var score = 0;
+        
+    // Enemy Vars
+    var enemyPic = new Image();
+    enemyPic.src= 'Images/Enemy Edited.png';
+    var enemies = [];
+    var totalEnimies = 12;
+    var startingPos = true;
+    
+
+    // Key Vars
+    var leftKeyPress = false;
+    var rightKeyPress = false;
+    var upKeyPress = false;
+    var downKeyPress = false; 
+    var enterKeyPress = false;
+    const LEFT_KEY = 37;
+    const RIGHT_KEY = 39;
+    const UP_KEY = 38;
+    const DOWN_KEY = 40;
+    const ENTER_KEY = 13;
+        
+    
+    // Background Vars
+    var backgroundWidth = 700;
+    var backgroundHeight = 700;
+    var background = new Image();
+    background.src = 'Images/Background 2.png';
+    
+    //Death Screen Vars
+    var DeathScreenWidth = 700;
+    var DeathScreenHeight = 700;
+    var DeathScreen = new Image();
+    DeathScreen.src = 'Images/GamerOverScreen.png';
+    
+    //Win Screen Vars
+    var WinScreenWidth = 700;
+    var WinScreenHeight = 700;
+    var WinScreen = new Image();
+    WinScreen.src = 'Images/GameWinScreen.png';
+    var winscreen = false;
+
+     // Mainloop  
+    function mainloop(){
+        
+        // This is the timer that counts down by frames
+        if(winscreen == false || deathscreen == false){
+         timer++  
+        
+        // This will activate the win screen after 40 secounds 
+        if(timer > 4000){
+           winscreen = true;
+            
+        }   
+            //These display the character and background
+            drawImage(background,0,0,backgroundHeight,backgroundWidth,'background')// Canvas
+            drawImage(player,playerXpos,playerYpos,80,60,'red')// Player
+            colorText('Score:'+timer, 50, 50, '20px Arial', 'white');
+            
+            
+             if(startingPos){
+               for(i = 0; i < totalEnimies; i++){
+                    makeEnemy();
+
+                }
+                 
+                startingPos = false;
+            }
+            
+            enemyMove();
+            playerMove();
+            drawnEnemy();
+            
+        }
+        
+        //Display Death Screen
+        if (deathscreen == true){
+     
+                drawImage(DeathScreen,-50,-70,DeathScreenWidth,DeathScreenHeight,'DeathScreen')
+                colorText(userName + ' Reached a time of ' + score, 185, 400, '20px Arial', 'white');
+            }
+        //Display Win Screen
+        if (winscreen == true){
+        
+                drawImage(WinScreen,-50,-70,WinScreenWidth,WinScreenHeight,'WinScreen')
+                colorText(userName + ' Reached a time of ' + score, 185, 400, '20px Arial', 'white');
+            }
+
+    }//MainLoop End
+    
+    
+    
+       // Make multiple enemys
+       function makeEnemy(){
+        var enemyPos = Math.floor(Math.random()* 9) + 4;
+           
+        const ENEMY_SIZE = 40;
+        var enemyXpos = enemyPos * (canvas.width / 1);
+        var enemyYpos = 0 - ENEMY_SIZE;
+        var enemyXspeed = Math.floor(Math.random() * (10 - 2) + 1);
+        var enemyYspeed = Math.floor(Math.random() * (10 - 1) + 3);
+           
+        var enemy = {
+            enemyXpos: enemyXpos,
+            enemyYpos: enemyYpos,
+            ENEMY_SIZE: ENEMY_SIZE,
+            enemyYspeed: enemyYspeed,
+            enemyXspeed: enemyYspeed
+            
+        }
+        
+        //This pushes enemy into the array
+        enemies.push(enemy);
+        
+    }// End Function
+        
+    // Enemys Spawn
+    function drawnEnemy(){
+        enemies.forEach(function(enemy, i){
+        drawImage(enemyPic, enemy.enemyXpos, enemy.enemyYpos,enemy.ENEMY_SIZE,enemy.ENEMY_SIZE,'red')
+        });
+    }// End Function
+        
+        // Enemy moving and collision
+        function enemyMove(){
+            enemies.forEach(function(enemy){
+            enemy.enemyYpos += enemy.enemyYspeed;
+            
+            if(enemy.enemyYpos > canvas.height){
+                    enemy.enemyYpos = 0 - enemy.ENEMY_SIZE;
+                    enemy.enemyXpos = Math.floor(Math.random()*(canvas.width-enemy.ENEMY_SIZE));
+                    enemy.enemyYspeed = Math.floor(Math.random()*(9 - 3) + 2);
+            }
+            
+            if(enemy.enemyYpos + enemy.ENEMY_SIZE > playerYpos && enemy.enemyYpos < playerYpos + PLAYER_SIZE &&             enemy.enemyXpos + enemy.ENEMY_SIZE > playerXpos && enemy.enemyXpos < playerXpos + PLAYER_SIZE){
+               playerXpos = 250;
+               playerYpos = 500;
+                deathscreen = true;
+                score = timer;
+               }
+            });
+        }// End Function
+    
+        // Key Pressed Function
+        function keyPressed(evt){
+            if(evt.keyCode == LEFT_KEY){
+                leftKeyPress = true;
+            }
+            if(evt.keyCode == RIGHT_KEY){
+                rightKeyPress = true;
+            }
+            if(evt.keyCode == UP_KEY){
+                upKeyPress = true;
+            }
+            if(evt.keyCode == DOWN_KEY){
+                downKeyPress == true;
+            }
+            if(evt.keyCode == ENTER_KEY){
+                enterKeyPress = true;
+            }
+        }// End Function
+        
+        
+        // End Screen
+        function colorText(msg, x, y, f, c) {
+            canvasContext.fillStyle = c;
+            canvasContext.font = f;
+            canvasContext.fillText(msg, x, y);
+
+        }// End Function
+        
+        //Username
+         while (userName == '' || userName == null) {// username
+            userName = prompt('Enter Username');
+        }
+        
+        //These are all the difficultys 
+        var difficulty = 'Easy';
+        var pass = false;
+        while (pass == false){
+            difficulty = prompt('How Hard? Easy, Medium or Hard?', 'Easy'); // Difficulty
+            if (difficulty == 'Easy'){
+                totalEnimies = 4;
+                pass = true;
+            } //Easy difficulty
+            
+            if (difficulty == 'Medium'){
+                totalEnimies = 7;
+                pass = true;
+            } //Medium difficulty
+            
+            if (difficulty == 'Hard'){
+                totalEnimies = 20;
+                pass = true;
+            } //Hard difficulty
+        }
+        
+        
+        // Key Released Function
+        function keyReleased(evt){
+            if(evt.keyCode == LEFT_KEY){
+                leftKeyPress = false;    
+            }
+            if(evt.keyCode == RIGHT_KEY){
+                rightKeyPress = false;
+            }
+            if(evt.keyCode == UP_KEY){
+                upKeyPress = false;
+            }
+            if(evt.keyCode == DOWN_KEY){
+                downKeyPress = false;
+            }
+            if(evt.keyCode == ENTER_KEY){
+                enterKeyPress = false;
+            }
+            
+        }// End Function
+        //Player moves
+    function playerMove(){
+        if (leftKeyPress){
+            playerXpos -= playerXspeed;
+        }
+        if (rightKeyPress){
+            playerXpos += playerXspeed;
+        }
+        if (upKeyPress){
+            playerYpos -= playerYspeed;
+        }
+        if (leftKeyPress){
+            playerYpos += playerYspeed;
+        }
+        if (enterKeyPress){
+            pass = true;
+        }
+    }// End Function
+    
+    // This displays the background behind the image
+    function colorRect(x,y,w,h,c){
+        canvasContext.fillStyle = c;
+        canvasContext.fillRect(x,y,w,h);
+    }// End Function
+
+    //This guides the custom images to display example width height ect
+    function drawImage(src,x,y,w,h){
+        canvasContext.drawImage(src,x,y,w,h);
+
+    }// End Function
+    
+        
+
+        
+    </script>
+</body>
