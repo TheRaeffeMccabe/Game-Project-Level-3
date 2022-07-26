@@ -4,8 +4,8 @@
     <link rel="stylesheet" href="Styles.css">
 </head>
 <body>
-    <canvas id="gameCanvas" width="600" height="600"></canvas>
-    
+    <canvas id="gameCanvas" width="860" height="610"></canvas>
+
     <script>
         var canvas, canvasContext;
 
@@ -57,20 +57,20 @@
         
     
     // Background Vars
-    var backgroundWidth = 700;
-    var backgroundHeight = 700;
+    var backgroundWidth = 1720;
+    var backgroundHeight = 880;
     var background = new Image();
-    background.src = 'Images/Background 2.png';
+    background.src = 'Images/SpaceTravel2.gif';
     
     //Death Screen Vars
-    var DeathScreenWidth = 700;
-    var DeathScreenHeight = 700;
+    var DeathScreenWidth = 1080;
+    var DeathScreenHeight = 736;
     var DeathScreen = new Image();
     DeathScreen.src = 'Images/GamerOverScreen.png';
     
     //Win Screen Vars
-    var WinScreenWidth = 700;
-    var WinScreenHeight = 700;
+    var WinScreenWidth = 860;
+    var WinScreenHeight = 610;
     var WinScreen = new Image();
     WinScreen.src = 'Images/GameWinScreen.png';
     var winscreen = false;
@@ -85,7 +85,7 @@
         // This will activate the win screen after 40 secounds 
         if(timer > 4000){
            winscreen = true;
-            
+        
         }   
             //These display the character and background
             drawImage(background,0,0,backgroundHeight,backgroundWidth,'background')// Canvas
@@ -167,7 +167,7 @@
                     enemy.enemyYspeed = Math.floor(Math.random()*(9 - 3) + 2);
             }
             
-            if(enemy.enemyYpos + enemy.ENEMY_SIZE > playerYpos && enemy.enemyYpos < playerYpos + PLAYER_SIZE &&             enemy.enemyXpos + enemy.ENEMY_SIZE > playerXpos && enemy.enemyXpos < playerXpos + PLAYER_SIZE){
+            if(enemy.enemyYpos + enemy.ENEMY_SIZE > playerYpos && enemy.enemyYpos < playerYpos + PLAYER_SIZE && enemy.enemyXpos + enemy.ENEMY_SIZE > playerXpos && enemy.enemyXpos < playerXpos + PLAYER_SIZE){
                playerXpos = 250;
                playerYpos = 500;
                 deathscreen = true;
