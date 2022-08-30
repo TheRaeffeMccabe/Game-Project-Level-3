@@ -1,3 +1,8 @@
+@font-face {
+    font-family: main;
+    src: url(fonts/agency.ttf);
+  }
+
 html {
     background-color: black;
     background-image: url(Images/SpaceTravel2.gif);
@@ -10,16 +15,71 @@ html {
 body{
     margin: 0px;
     display: grid;
-    grid-template-columns: 1fr 5.5fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+
 }
 /* Body for the grids to put canvas in */
 
 canvas {
-    grid-column: 2/3;;
     display: block;
     width: 100%;
     margin: 4vh 5px;
     height: 68vh;
     background-color: black;
+    grid-column: 1/4;
 }
 /* Canvas for the game over the background (HUD) */
+
+p{
+    font-family: fantasy;
+    width: 20vw;
+    height: 35vh;
+    background-color: rgb(85, 49, 218);
+    border-radius: 30px;
+    padding: 2%;
+    margin: 5px 3px;
+}
+
+
+h3{
+    grid-column: 2/3;
+    font-family: fantasy;
+    width: 20vw;
+    height: 19vh;
+    
+    background-color: rgb(85, 49, 218);
+    border-radius: 30px;
+    padding: 2%;
+    margin: 3px 3px;
+    font-size: 80px;
+}
+.Title {
+    grid-row: 3/4;
+    grid-column: 2/3;
+    font-size: 29px;
+
+}
+nav {
+    grid-column: 2/3;
+    font-family: fantasy;
+    width: 20vw;
+    height: 6vh;
+    background-color: rgb(85, 49, 218);
+    border-radius: 10px;
+    padding: 2%;
+    margin: 40px 0px;
+    font-size: 50px;
+    
+    
+}
+
+nav a {
+    background-color: rgb(85, 49, 218)
+
+}
+
+nav a:hover {
+    background-color: rgb(251, 254, 255)
+
+}
