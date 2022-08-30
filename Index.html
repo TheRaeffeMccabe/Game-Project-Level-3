@@ -2,6 +2,7 @@
 <head> 
     <title>Velocity</title>
     <link rel="stylesheet" href="Styles.css">
+    <script rel="Avatar.js"></script>
 </head>
 <body>
     <canvas id="gameCanvas" width="860" height="610"></canvas>
@@ -86,8 +87,8 @@
         if(timer > 4000){
            winscreen = true;
         
-        }   
-            //These display the character and background
+        }
+        //These display the character and background
             drawImage(background,0,0,backgroundHeight,backgroundWidth,'background')// Canvas
             drawImage(player,playerXpos,playerYpos,80,60,'red')// Player
             colorText('Score:'+timer, 50, 50, '20px Arial', 'white');
@@ -251,23 +252,6 @@
             
         }// End Function
         //Player moves
-    function playerMove(){
-        if (leftKeyPress){
-            playerXpos -= playerXspeed;
-        }
-        if (rightKeyPress){
-            playerXpos += playerXspeed;
-        }
-        if (upKeyPress){
-            playerYpos -= playerYspeed;
-        }
-        if (leftKeyPress){
-            playerYpos += playerYspeed;
-        }
-        if (enterKeyPress){
-            pass = true;
-        }
-    }// End Function
     
     // This displays the background behind the image
     function colorRect(x,y,w,h,c){
