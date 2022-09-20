@@ -1,16 +1,16 @@
 class Player {
 
-    constructor(PLAYER_IMG, x, y, h, w, xSpeed, ySpeed) {
+    constructor(PLAYER_IMG, x, y, h, w, playerXspeed, playerYspeed) {
         
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
-        this.xSpeed = xSpeed;
-        this.ySpeed = ySpeed;
+        this.playerXspeed = playerXspeed;
+        this.playerYspeed = playerYspeed;
 
         PLAYER_IMG = new Image();
-        PLAYER_IMG.src = 'Images/Player Edited.png';
+        PLAYER_IMG.src = 'Images/Player Ship One.gif';
 
         this.src = PLAYER_IMG;
 

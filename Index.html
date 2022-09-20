@@ -2,7 +2,7 @@
 <head> 
     <title>Velocity</title>
     <link rel="stylesheet" href="Styles.css">
-    <script rel="Avatar.js"></script>
+    <script src="Avatar.js"></script>
 </head>
 <body>
     <canvas id="gameCanvas" width="860" height="610"></canvas>
@@ -22,13 +22,18 @@
         }
     // Player Vars  
     var player = new Image();
-    player.src = 'Images/Player Edited.png';
+    player.src = 'Images/Player Ship One.gif';
     var playerXpos = 250;
     var playerYpos = 500;
     var playerXspeed = 15;
     var playerYspeed = 0;
     var PLAYER_SIZE = 40;
+
+    var player = new
+    Player(PLAYER_IMG, playerXpos, playerYpos, P_SIZE, P_SIZE, playerXspeed, playerYspeed);
+    
     var timer = 0;
+
         
         
     //Username Difficulty
@@ -104,7 +109,7 @@
             }
             
             enemyMove();
-            playerMove();
+            Avatar.playerMove();
             drawnEnemy();
             
         }
