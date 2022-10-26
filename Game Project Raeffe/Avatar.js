@@ -10,8 +10,7 @@ class Player {
         this.playerYspeed = playerYspeed;
 
         PLAYER_IMG = new Image();
-        PLAYER_IMG.src = 'Images/Player Ship One.gif';
-
+        PLAYER_IMG.src = 'Images/SpaceShip.png';
         this.src = PLAYER_IMG;
 
     }//basic creation of the player
