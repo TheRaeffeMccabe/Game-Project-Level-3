@@ -40,7 +40,7 @@ p{
     padding: 2%;
     margin: 5px 3px;
 }
-
+/* Defines first paragraph */
 
 h3{
     grid-column: 2/3;
@@ -54,12 +54,14 @@ h3{
     margin: 3px 3px;
     font-size: 80px;
 }
+/* Defines first HEading */
 .Title {
     grid-row: 3/4;
     grid-column: 2/3;
     font-size: 29px;
 
 }
+/* Defines title */
 nav {
     grid-column: 2/3;
     font-family: fantasy;
@@ -73,13 +75,15 @@ nav {
     
     
 }
-
+/* Defines Navigation Bars aka links to start the game */
 nav a {
     background-color: rgb(85, 49, 218)
 
 }
+/* Defines Nav Background */
 
 nav a:hover {
     background-color: rgb(251, 254, 255)
 
 }
+/* Defines Nav Hovercolor */
